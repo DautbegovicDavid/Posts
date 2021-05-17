@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Posts.API.Models
+﻿namespace Posts.API.Models
 {
     public class PostTag
     {

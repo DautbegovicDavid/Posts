@@ -1,7 +1,6 @@
 ﻿using System.Globalization;
 using System.Text;
 
-
 namespace Posts.API.Helpers
 {
     public class Helper

@@ -30,12 +30,18 @@ namespace Posts.API.Controllers
                 Models.Tag tagEntity = _context.Tags.Where(w => w.title == tag).FirstOrDefault();
                 if (tagEntity != null)
                 {
-                    List<Models.Post> p = _context.PostsTags.Include(i => i.Post).
+                    List<Models.Post> postsTemp = _context.PostsTags.Include(i => i.Post).
                             Where(w => w.TagID == tagEntity.TagID).
                                 Select(s => s.Post).
                                     OrderByDescending(o => o.createdAt).
                                         ToList();
-                    return _mapper.Map<List<Post>>(p);
+
+                    List<Models.Post> postsTemp1 = new List<Models.Post>();
+                    foreach (Models.Post p in postsTemp)
+                    {
+                        postsTemp1.Add(_context.Posts.Include("tagList.Tag").Where(w => w.PostID == p.PostID).FirstOrDefault());
+                    }
+                    return _mapper.Map<List<Post>>(postsTemp1);
                 }
                 else
                 {
